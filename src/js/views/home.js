@@ -1,15 +1,23 @@
-import React from "react";
-import rigoImage from "../../img/rigo-baby.jpg";
-import "../../styles/home.css";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-export const Home = () => (
-	<div className="text-center mt-5">
-		<h1>Hello Rigo!</h1>
-		<p>
-			<img src={rigoImage} />
-		</p>
-		<a href="#" className="btn btn-success">
-			If you see this green button, bootstrap is working
-		</a>
-	</div>
-);
+const Home = () => {
+    return (
+        <div className="container">
+            <h1>Welcome to the Contact Manager</h1>
+            <p>
+                Use the links below to view your contacts or add a new contact.
+            </p>
+            <div className="list-group">
+                <Link to="/contacts" className="list-group-item list-group-item-action">
+                    View Contacts
+                </Link>
+                <Link to="/create-contact" className="list-group-item list-group-item-action">
+                    Add New Contact
+                </Link>
+            </div>
+        </div>
+    );
+};
+
+export default Home;

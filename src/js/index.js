@@ -1,16 +1,27 @@
-//import react into the bundle
-import React from 'react'
-import {createRoot} from 'react-dom/client'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { AppContextProvider } from './store/appContext';
+import Home from './views/home';
+import ContactList from './views/ContactList';
+import CreateContact from './views/CreateContact';
+import Layout from './layout';
 
-//include your index.scss file into the bundle
-import "../styles/index.css";
+import '../styles/demo.css';
+import '../styles/home.css';
+import '../styles/index.css';
 
-//import your own components
-import Layout from './layout.js'
-
-//
-const root = createRoot(document.querySelector("#app"))
-
-//render your react application
-root.render(<Layout/>)
-
+ReactDOM.render(
+    <AppContextProvider>
+        <Router>
+            <Layout>
+                <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route path="/contacts" component={ContactList} />
+                    <Route path="/create-contact/:id?" component={CreateContact} />
+                </Switch>
+            </Layout>
+        </Router>
+    </AppContextProvider>,
+    document.getElementById('root')
+);

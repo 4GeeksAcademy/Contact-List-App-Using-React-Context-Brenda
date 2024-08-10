@@ -1,37 +1,39 @@
-import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import ScrollToTop from "./component/scrollToTop";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import { Home } from "./views/home";
-import { Demo } from "./views/demo";
-import { Single } from "./views/single";
-import injectContext from "./store/appContext";
+const Layout = ({ children }) => {
+    return (
+        <div>
+            <header className="navbar navbar-expand-lg navbar-light bg-light">
+                <div className="container">
+                    <Link className="navbar-brand" to="/">Contact Manager</Link>
+                    <div className="collapse navbar-collapse">
+                        <ul className="navbar-nav ml-auto">
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/">Home</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/contacts">Contacts</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/create-contact">Add Contact</Link>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
 
-import { Navbar } from "./component/navbar";
-import { Footer } from "./component/footer";
+            <main className="container mt-4">
+                {children}
+            </main>
 
-//create your first component
-const Layout = () => {
-	//the basename is used when your project is published in a subdirectory and not in the root of the domain
-	// you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
-	const basename = process.env.BASENAME || "";
-
-	return (
-		<div>
-			<BrowserRouter basename={basename}>
-				<ScrollToTop>
-					<Navbar />
-					<Routes>
-						<Route path="/" element={<Home />} />
-						<Route path="/demo" element={<Demo />} />
-						<Route path="/single/:theid" element={<Single />} />
-						<Route path="*" element={<h1>Not found!</h1>} />
-					</Routes>
-					<Footer />
-				</ScrollToTop>
-			</BrowserRouter>
-		</div>
-	);
+            <footer className="footer mt-auto py-3 bg-light">
+                <div className="container">
+                    <span className="text-muted">© 2024 Contact Manager</span>
+                </div>
+            </footer>
+        </div>
+    );
 };
 
-export default injectContext(Layout);
+export default Layout;
